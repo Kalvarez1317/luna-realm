@@ -55,8 +55,16 @@ export default function StarConstellation() {
   const [loading, setLoading] = useState(false);
 
   async function fetchStars() {
-    const { data } = await supabase.from("moon_stars").select("*");
-    if (data) setStars(data);
+    const { data, error } = await supabase
+      .from("moon_stars")
+      .select("id, star_index, display_name");
+
+    if (error) {
+      console.error("Fetch stars error:", error);
+      return;
+    }
+
+    setStars(data ?? []);
   }
 
   useEffect(() => {
@@ -64,24 +72,33 @@ export default function StarConstellation() {
   }, []);
 
   async function claimStar() {
-    if (selectedStar === null || !name.trim()) return;
+    if (selectedStar === null) return;
+
+    const cleanName = name.trim();
+
+    if (cleanName.length < 2 || cleanName.length > 24) {
+      alert("Please enter a name between 2 and 24 characters.");
+      return;
+    }
 
     setLoading(true);
 
     const { error } = await supabase.from("moon_stars").insert({
       star_index: selectedStar,
-      display_name: name.trim(),
+      display_name: cleanName,
     });
 
     setLoading(false);
 
-    if (!error) {
-      setSelectedStar(null);
-      setName("");
-      fetchStars();
-    } else {
-      alert("That star may already be claimed.");
+    if (error) {
+      console.error("Claim star error:", error);
+      alert(`Star could not be claimed: ${error.message}`);
+      return;
     }
+
+    setSelectedStar(null);
+    setName("");
+    fetchStars();
   }
 
   return (
