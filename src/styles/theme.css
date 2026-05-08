@@ -1,0 +1,189 @@
+:root {
+  --blue1: #6fabfb;
+  --blue2: #254dcc;
+  --blue3: #6af3f8;
+  --blue4: #7bacdb;
+
+  --purple1: #a597f9;
+  --purple2: #421364;
+  --purple3: #a39ffa;
+  --purple4: #c983f8;
+
+  --pink1: #f5aff8;
+  --pink2: #f5b9f9;
+  --pink3: #ee8af9;
+  --pink4: #fcd5fc;
+}
+
+/* BACKGROUND IMAGE */
+.luna-bg {
+  position: fixed;
+  inset: 0;
+  background-image: url("/luna-bg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -10;
+}
+
+/* SOFT PASTEL OVERLAY */
+.pastel-wash {
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(245, 175, 248, 0.16), transparent 35%),
+    radial-gradient(circle at 70% 25%, rgba(111, 171, 251, 0.12), transparent 35%),
+    radial-gradient(circle at 20% 30%, rgba(245, 213, 252, 0.12), transparent 30%);
+  z-index: -9;
+}
+
+/* MOON AMBIENCE */
+.moon-ambience {
+  position: fixed;
+  top: 75px;
+  left: 85px;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(252, 213, 252, 0.45),
+    rgba(245, 185, 249, 0.22),
+    rgba(165, 151, 249, 0.08),
+    transparent 70%
+  );
+  filter: blur(22px);
+  animation: moonGlow 7s ease-in-out infinite;
+  z-index: -8;
+}
+
+/* SMALL TWINKLING STARS */
+.stars-small {
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, rgba(255, 255, 255, 0.95) 1px, transparent 1.5px),
+    radial-gradient(circle, rgba(245, 185, 249, 0.8) 1px, transparent 1.5px),
+    radial-gradient(circle, rgba(106, 243, 248, 0.75) 1px, transparent 1.5px);
+  background-size: 90px 90px, 140px 140px, 210px 210px;
+  background-position: 12px 18px, 60px 90px, 130px 40px;
+  animation: twinkleSmall 4.5s ease-in-out infinite alternate;
+  opacity: 0.45;
+  z-index: -7;
+}
+
+/* BIGGER TWINKLING STARS */
+.stars-big {
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, rgba(255, 255, 255, 0.95) 2px, transparent 3px),
+    radial-gradient(circle, rgba(245, 175, 248, 0.9) 2px, transparent 3px),
+    radial-gradient(circle, rgba(111, 171, 251, 0.9) 2px, transparent 3px);
+  background-size: 260px 260px, 340px 340px, 430px 430px;
+  background-position: 40px 60px, 160px 120px, 260px 200px;
+  animation: twinkleBig 5.5s ease-in-out infinite alternate;
+  opacity: 0.55;
+  z-index: -6;
+}
+
+/* MOVING CLOUD AMBIENCE */
+.cloud-ambience {
+  position: fixed;
+  inset: -15%;
+  background:
+    radial-gradient(circle at 18% 45%, rgba(245, 185, 249, 0.14), transparent 28%),
+    radial-gradient(circle at 70% 55%, rgba(245, 175, 248, 0.12), transparent 30%),
+    radial-gradient(circle at 42% 70%, rgba(111, 171, 251, 0.10), transparent 28%);
+  filter: blur(70px);
+  animation: cloudDrift 38s ease-in-out infinite alternate;
+  z-index: -5;
+}
+
+/* GLASS CARD STYLE */
+.luna-card {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(252, 213, 252, 0.22);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 0 30px rgba(165, 151, 249, 0.14);
+}
+
+/* TAROT FLIP */
+.perspective {
+  perspective: 1000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+/* ANIMATIONS */
+@keyframes moonGlow {
+  0% {
+    opacity: 0.45;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.9;
+    transform: scale(1.08);
+  }
+
+  100% {
+    opacity: 0.45;
+    transform: scale(1);
+  }
+}
+
+@keyframes twinkleSmall {
+  0% {
+    opacity: 0.25;
+  }
+
+  50% {
+    opacity: 0.6;
+  }
+
+  100% {
+    opacity: 0.35;
+  }
+}
+
+@keyframes twinkleBig {
+  0% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.85;
+    transform: scale(1.015);
+  }
+
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+}
+
+@keyframes cloudDrift {
+  0% {
+    transform: translateX(-20px) translateY(0px);
+  }
+
+  50% {
+    transform: translateX(25px) translateY(-18px);
+  }
+
+  100% {
+    transform: translateX(-10px) translateY(15px);
+  }
+}
