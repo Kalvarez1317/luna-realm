@@ -24,7 +24,8 @@ export async function GET() {
 
   const data = await res.json();
 
-  const isLive = Array.isArray(data.data) && data.data.length > 0;
+  const isLive =
+    Array.isArray(data.data) && data.data.length > 0;
 
   return Response.json({
     isLive,
