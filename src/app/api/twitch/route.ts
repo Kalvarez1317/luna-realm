@@ -1,8 +1,8 @@
 export async function GET() {
   const clientId = process.env.TWITCH_CLIENT_ID;
-  const token = process.env.TWITCH_ACCESS_TOKEN;
+  const accessToken = process.env.TWITCH_ACCESS_TOKEN;
 
-  if (!clientId || !token) {
+  if (!clientId || !accessToken) {
     return Response.json({
       isLive: false,
       stream: null,
@@ -10,17 +10,20 @@ export async function GET() {
     });
   }
 
+  const headers = new Headers();
+
+  headers.set("Client-ID", clientId);
+  headers.set("Authorization", `Bearer ${accessToken}`);
+
   const res = await fetch(
     "https://api.twitch.tv/helix/streams?user_login=almighty_goddess_prodigy",
     {
-      headers: {
-        "Client-ID": clientId,
-        Authorization: `Bearer ${token}`,
-      },
+      headers,
     }
   );
 
   const data = await res.json();
+
   const isLive = Array.isArray(data.data) && data.data.length > 0;
 
   return Response.json({
