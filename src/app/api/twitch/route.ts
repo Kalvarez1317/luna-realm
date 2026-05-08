@@ -2,6 +2,14 @@ export async function GET() {
   const clientId = process.env.TWITCH_CLIENT_ID;
   const token = process.env.TWITCH_ACCESS_TOKEN;
 
+  if (!clientId || !token) {
+    return Response.json({
+      isLive: false,
+      stream: null,
+      error: "Missing Twitch environment variables",
+    });
+  }
+
   const res = await fetch(
     "https://api.twitch.tv/helix/streams?user_login=almighty_goddess_prodigy",
     {
@@ -13,8 +21,7 @@ export async function GET() {
   );
 
   const data = await res.json();
-
-  const isLive = data.data && data.data.length > 0;
+  const isLive = Array.isArray(data.data) && data.data.length > 0;
 
   return Response.json({
     isLive,
