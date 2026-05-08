@@ -6,6 +6,7 @@ import {
   Forum,
 } from "next/font/google";
 import EnteringScreen from "@/components/EnteringScreen";
+import { Analytics } from "@vercel/analytics/next";
 
 const uncial = Uncial_Antiqua({
   weight: "400",
@@ -49,6 +50,7 @@ export default function RootLayout({
       <body>
         <EnteringScreen />
         {children}
+        <Analytics />
       </body>
     </html>
   );
