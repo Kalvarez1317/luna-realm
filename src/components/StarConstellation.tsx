@@ -77,7 +77,7 @@ export default function StarConstellation() {
     const cleanName = name.trim();
 
     if (cleanName.length < 2 || cleanName.length > 24) {
-      alert("Please enter a name between 2 and 24 characters.");
+      alert(`Star could not be claimed: ${error.message}`);
       return;
     }
 
